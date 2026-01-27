@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080';
+// Require backend URL to be provided via environment for consistent deployments
+const baseURL = import.meta.env.VITE_BACKEND_URL;
+
+if (!baseURL) {
+  throw new Error('VITE_BACKEND_URL is not set in the environment');
+}
 
 export const api = axios.create({
   baseURL,
