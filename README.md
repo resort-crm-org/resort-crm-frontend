@@ -1,4 +1,4 @@
-# Resort CRM Frontend
+# Resort CRM – Frontend Application
 
 A modern, responsive React-based frontend application for managing resort operations. This system provides a comprehensive interface for managing rooms, guests, and allotments within a resort management system.
 
@@ -89,6 +89,24 @@ npm run preview
 
 The application communicates with the backend through the `api.js` service module using Axios. Configure your API endpoints in the services layer before deploying to production.
 
+## Backend Dependency
+
+This frontend application depends on a Spring Boot backend service that provides REST APIs for managing guests, rooms, and allotments.
+
+For full functionality, the backend service must be running and accessible via a public API URL. The frontend communicates with the backend using environment-based configuration.
+
+Without the backend service, the UI will load but data operations will not function.
+
+## Environment Configuration
+
+The backend API base URL is configured using environment variables to support different environments such as local development and production deployment.
+
+Example environment variable:
+
+```env
+VITE_API_BASE_URL=https://<backend-url>
+```
+
 ## Deployment
 
 This application is deployed on Vercel and is live at:
@@ -96,6 +114,12 @@ This application is deployed on Vercel and is live at:
 🌐 **[https://resort-crm-by-dk.vercel.app](https://resort-crm-by-dk.vercel.app)**
 
 The application is automatically deployed from the main branch and benefits from Vercel's global CDN for optimal performance.
+
+## Known Limitations
+
+- The frontend requires an active backend service to perform CRUD operations.
+- Backend availability may affect real-time data updates.
+- Authentication and role-based access control are not implemented in the current version.
 
 ## Quality Assurance
 
