@@ -121,6 +121,12 @@ The application is automatically deployed from the main branch and benefits from
 - Backend availability may affect real-time data updates.
 - Authentication and role-based access control are not implemented in the current version.
 
+## Challenges Faced
+
+During development and deployment, several integration and configuration challenges were encountered, including backend API connectivity and environment configuration. These issues were resolved by using environment-based API URLs and proper build configuration.
+
+Detailed explanations of these challenges and solutions are documented in the backend repository.
+
 ## Quality Assurance
 
 SonarQube configuration is included via `sonar-project.properties` for code quality analysis.
