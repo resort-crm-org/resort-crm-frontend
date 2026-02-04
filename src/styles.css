@@ -101,7 +101,7 @@ button.danger {
 }
 
 .meta {
-  color: #9ca3af;
+  color: #cbd5e1;
   font-size: 13px;
 }
 
@@ -116,17 +116,18 @@ button.danger {
   border-radius: 999px;
   font-size: 12px;
   background: #1f2937;
+  color: #f1f5f9;
   margin-top: 6px;
 }
 
 .tag.success {
   background: #22c55e33;
-  color: #22c55e;
+  color: #16a34a;
 }
 
 .tag.warning {
   background: #f59e0b33;
-  color: #f59e0b;
+  color: #d97706;
 }
 
 .banner {
@@ -137,12 +138,12 @@ button.danger {
 
 .banner.error {
   background: #7f1d1d;
-  color: #fecdd3;
+  color: #fef2f2;
 }
 
 .banner.info {
   background: #0b3b27;
-  color: #bbf7d0;
+  color: #dcfce7;
 }
 
 @media (max-width: 640px) {
