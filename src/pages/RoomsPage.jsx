@@ -21,7 +21,7 @@ function RoomsPage({ rooms, onRelease, loading }) {
             </div>
             {room.guest && (
               <div className="actions">
-                <button onClick={() => onRelease(room.guest.id)} disabled={loading}>
+                <button onClick={() => onRelease(room.guest.id)} disabled={loading} className="btn-release">
                   Release
                 </button>
               </div>

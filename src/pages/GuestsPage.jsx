@@ -34,7 +34,7 @@ function GuestsPage({
           value={guestForm.address}
           onChange={(e) => setGuestForm({ ...guestForm, address: e.target.value })}
         />
-        <button onClick={onCreate} disabled={loading}>
+        <button onClick={onCreate} disabled={loading} className="btn-add">
           Add Guest
         </button>
       </div>
@@ -52,7 +52,7 @@ function GuestsPage({
               </div>
               <div className="actions">
                 {room && (
-                  <button onClick={() => onRelease(guest.id)} disabled={loading}>
+                  <button onClick={() => onRelease(guest.id)} disabled={loading} className="btn-release">
                     Release Room
                   </button>
                 )}

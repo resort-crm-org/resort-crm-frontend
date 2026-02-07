@@ -13,6 +13,7 @@ import RoomsPage from './pages/RoomsPage';
 import AllotmentPage from './pages/AllotmentPage';
 
 function App() {
+  const [theme, setTheme] = useState('dark');
   const [guests, setGuests] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [availableRooms, setAvailableRooms] = useState([]);
@@ -25,8 +26,17 @@ function App() {
   const [info, setInfo] = useState('');
 
   useEffect(() => {
+    const savedTheme = localStorage.getItem('crm-theme');
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      setTheme(savedTheme);
+    }
     refreshAll();
   }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('crm-theme', theme);
+  }, [theme]);
 
   const refreshAll = async () => {
     try {
@@ -130,12 +140,20 @@ function App() {
   }, [rooms]);
 
   const isAllotDisabled = availableRooms.length === 0 || loading;
+  const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
 
   return (
     <div className="app">
       <header>
-        <h1>Resort CRM</h1>
-        <p>Manual room allotment with live availability</p>
+        <div className="header-row">
+          <div>
+            <h1>Resort CRM</h1>
+            <p>Manual room allotment with live availability</p>
+          </div>
+          <button className="theme-toggle" onClick={toggleTheme} type="button">
+            {theme === 'dark' ? 'Light theme' : 'Dark theme'}
+          </button>
+        </div>
       </header>
 
       {error && <div className="banner error">{error}</div>}

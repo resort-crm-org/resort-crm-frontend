@@ -42,7 +42,7 @@ function AllotmentPage({
           onChange={(e) => setDays(e.target.value)}
         />
 
-        <button onClick={onAllot} disabled={disabled || loading}>
+        <button onClick={onAllot} disabled={disabled || loading} className="btn-allot">
           Allot Room
         </button>
       </div>
