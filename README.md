@@ -155,7 +155,7 @@ The application can be configured with a custom domain through Vercel's domain s
 
 Presentation slides and documentation:
 
-📄 **[View Presentation (PPTX)](Proof/Resort%20CRM%20Presentation.pptx)**
+📄 **[View Presentation (PDF)](Proof/Resort%20CRM%20Presentation.pdf)**
 
 ## Challenges Faced and Solutions Implemented
 
