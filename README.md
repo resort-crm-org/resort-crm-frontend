@@ -149,7 +149,7 @@ The application can be configured with a custom domain through Vercel's domain s
 
 ## Project Demo
 
- **[View Presentation](https://drive.google.com/file/d/1NJtjuqoe826sL0LhYJCs43jDAbEGi1h-/view?usp=sharing)**
+ **[View Demo Video](https://drive.google.com/file/d/1NJtjuqoe826sL0LhYJCs43jDAbEGi1h-/view?usp=sharing)**
 
 ## Presentation in English
 
