@@ -149,13 +149,13 @@ The application can be configured with a custom domain through Vercel's domain s
 
 ## Project Demo
 
-Demo video showcasing the application functionality is available in the `Proof/` directory: `demo.mp4`
+ **[View Presentation](https://drive.google.com/file/d/1NJtjuqoe826sL0LhYJCs43jDAbEGi1h-/view?usp=sharing)**
 
 ## Presentation in English
 
 Presentation slides and documentation:
 
-📊 **[View Presentation](https://drive.google.com/file/d/1NJtjuqoe826sL0LhYJCs43jDAbEGi1h-/view?usp=sharing)**
+📄 **[View Presentation (PPTX)](Proof/Resort%20CRM%20Presentation.pptx)**
 
 ## Challenges Faced and Solutions Implemented
 
