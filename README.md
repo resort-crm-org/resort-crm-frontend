@@ -1,8 +1,18 @@
 # Resort CRM – Frontend Application
 
+## Overview
+
 A modern, responsive React-based frontend application for managing resort operations. This system provides a comprehensive interface for managing rooms, guests, and allotments within a resort management system.
 
-## Tech Stack
+This Resort CRM frontend is a complete management dashboard for resort operations. It provides staff and managers with an intuitive interface to:
+
+- **Manage Rooms**: View, organize, and track the status of all resort rooms
+- **Handle Guests**: Maintain guest profiles, track check-ins/check-outs, and manage reservations
+- **Control Allotments**: Manage room availability, allocations, and inventory across different booking channels
+- **Real-time Updates**: Get live updates on room status and guest information through API integration
+- **Responsive UI**: Access the system from desktop and mobile devices with a modern, user-friendly interface
+
+### Tech Stack
 
 - **Framework**: React 18.3.1
 - **Build Tool**: Vite 5.0.10
@@ -10,7 +20,7 @@ A modern, responsive React-based frontend application for managing resort operat
 - **JavaScript Version**: ES Modules
 - **Styling**: CSS
 
-## Project Structure
+### Project Structure
 
 ```
 src/
@@ -27,26 +37,14 @@ src/
 └── styles.css                   # Global styles
 ```
 
-## What Does This Frontend Do?
-
-This Resort CRM frontend is a complete management dashboard for resort operations. It provides staff and managers with an intuitive interface to:
-
-- **Manage Rooms**: View, organize, and track the status of all resort rooms
-- **Handle Guests**: Maintain guest profiles, track check-ins/check-outs, and manage reservations
-- **Control Allotments**: Manage room availability, allocations, and inventory across different booking channels
-- **Real-time Updates**: Get live updates on room status and guest information through API integration
-- **Responsive UI**: Access the system from desktop and mobile devices with a modern, user-friendly interface
-
-The frontend communicates seamlessly with the backend API to ensure data consistency and provide a smooth operational workflow for resort staff.
-
-## Features
+### Features
 
 - **Room Management** - View and manage resort rooms with loading states
 - **Guest Management** - Handle guest information and bookings
 - **Allotment Management** - Manage room allotments and availability
 - **API Integration** - Seamless communication with backend services via Axios
 
-## Getting Started
+## Development Frontend
 
 ### Prerequisites
 
@@ -61,7 +59,7 @@ The frontend communicates seamlessly with the backend API to ensure data consist
    npm install
    ```
 
-### Development
+### Development Server
 
 Start the development server:
 
@@ -71,7 +69,29 @@ npm run dev
 
 The application will be available at `http://localhost:3000`
 
-### Build
+### API Integration
+
+The application communicates with the backend through the `api.js` service module using Axios. Configure your API endpoints in the services layer before deploying to production.
+
+### Backend Dependency
+
+This frontend application depends on a Spring Boot backend service that provides REST APIs for managing guests, rooms, and allotments.
+
+For full functionality, the backend service must be running and accessible via a public API URL. The frontend communicates with the backend using environment-based configuration.
+
+Without the backend service, the UI will load but data operations will not function.
+
+### Environment Configuration
+
+The backend API base URL is configured using environment variables to support different environments such as local development and production deployment.
+
+Example environment variable:
+
+```env
+VITE_API_BASE_URL=https://<backend-url>
+```
+
+## Build Project Frontend
 
 Build for production:
 
@@ -85,29 +105,29 @@ npm run build
 npm run preview
 ```
 
-## API Integration
+![Frontend Build Screenshot](Proof/Frontend%20Build.png)
 
-The application communicates with the backend through the `api.js` service module using Axios. Configure your API endpoints in the services layer before deploying to production.
+## Sonar Frontend
 
-## Backend Dependency
+SonarQube configuration is included via `sonar-project.properties` for code quality analysis.
 
-This frontend application depends on a Spring Boot backend service that provides REST APIs for managing guests, rooms, and allotments.
+The project includes comprehensive quality assurance settings to ensure code quality and maintainability standards are met.
 
-For full functionality, the backend service must be running and accessible via a public API URL. The frontend communicates with the backend using environment-based configuration.
+![Sonar Frontend Screenshot](Proof/Sonar%20Frontend.png)
 
-Without the backend service, the UI will load but data operations will not function.
+## Project Pull Request
 
-## Environment Configuration
+For contributing to this project, please follow the standard Git workflow:
 
-The backend API base URL is configured using environment variables to support different environments such as local development and production deployment.
+1. Create a feature branch from `main`
+2. Make your changes and commit with clear messages
+3. Push to your branch
+4. Create a Pull Request with detailed description
+5. Ensure all CI/CD checks pass
 
-Example environment variable:
+![Pull Request Screenshot](Proof/PR.png)
 
-```env
-VITE_API_BASE_URL=https://<backend-url>
-```
-
-## Deployment
+## Vercel Deployment
 
 This application is deployed on Vercel and is live at:
 
@@ -115,22 +135,53 @@ This application is deployed on Vercel and is live at:
 
 The application is automatically deployed from the main branch and benefits from Vercel's global CDN for optimal performance.
 
+![Frontend Deployment Screenshot](Proof/Frontend%20deployed.png)
+
+## Vercel Deployment with Custom Domain
+
+The application can be configured with a custom domain through Vercel's domain settings. Connect your custom domain in the Vercel project settings to use a branded URL instead of the default vercel.app domain.
+
+![Custom Domain Configuration Screenshot](Proof/Github%20Custom%20Domain.png)
+
+## Project Demo
+
+Demo video showcasing the application functionality is available in the `Proof/` directory: `demo.mp4`
+
+## Presentation in English
+
+Presentation slides and documentation:
+
+📊 **[View Presentation](https://drive.google.com/file/d/1NJtjuqoe826sL0LhYJCs43jDAbEGi1h-/view?usp=sharing)**
+
+## Challenges Faced and Solutions Implemented
+
+During development and deployment, several integration and configuration challenges were encountered:
+
+### Challenge 1: Backend API Connectivity
+- **Issue**: Establishing reliable communication between frontend and backend API
+- **Solution**: Implemented environment-based configuration for API URLs to support different deployment environments (local, staging, production)
+
+### Challenge 2: Environment Configuration
+- **Issue**: Managing different API endpoints across development and production environments
+- **Solution**: Utilized Vite's environment variables system with `.env.local` and `.env.production` files
+
+### Challenge 3: Build Optimization
+- **Issue**: Optimizing build size and performance for Vercel deployment
+- **Solution**: Configured Vite with proper plugin settings and tree-shaking to minimize bundle size
+
+### Challenge 4: CORS and Backend Dependency
+- **Issue**: Frontend requires active backend service for data operations
+- **Solution**: Implemented proper error handling and user feedback when backend is unavailable
+
+These challenges were resolved through iterative development, proper testing, and close coordination with the backend team.
+
 ## Known Limitations
 
 - The frontend requires an active backend service to perform CRUD operations.
 - Backend availability may affect real-time data updates.
 - Authentication and role-based access control are not implemented in the current version.
 
-## Challenges Faced
+---
 
-During development and deployment, several integration and configuration challenges were encountered, including backend API connectivity and environment configuration. These issues were resolved by using environment-based API URLs and proper build configuration.
+**Last Updated: February 7, 2026**
 
-Detailed explanations of these challenges and solutions are documented in the backend repository.
-
-## Quality Assurance
-
-SonarQube configuration is included via `sonar-project.properties` for code quality analysis.
-
-## License
-
-Private - Resort CRM System
