@@ -131,13 +131,17 @@ For contributing to this project, please follow the standard Git workflow:
 
 This application is deployed on Vercel and is live at:
 
-🌐 **[https://resort-crm-by-dk.vercel.app](https://resort-crm-by-dk.vercel.app)**
+🌐 **[https://resort-crm-frontend.vercel.app/](https://resort-crm-by-dk.vercel.app)**
 
 The application is automatically deployed from the main branch and benefits from Vercel's global CDN for optimal performance.
 
 ![Frontend Deployment Screenshot](Proof/Frontend%20deployed.png)
 
 ## Vercel Deployment with Custom Domain
+
+The application is also accessible through a custom domain:
+
+🌐 **[https://www.dkportfolio.me](https://www.dkportfolio.me)**
 
 The application can be configured with a custom domain through Vercel's domain settings. Connect your custom domain in the Vercel project settings to use a branded URL instead of the default vercel.app domain.
 
