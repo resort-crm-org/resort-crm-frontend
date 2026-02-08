@@ -157,6 +157,10 @@ Presentation slides and documentation:
 
 📄 **[View Presentation (PDF)](Proof/Resort%20CRM%20Presentation.pdf)**
 
+## GitHub Student Pack Demo
+
+![GitHub Student Pack Demo Screenshot](Proof/Github%20Student%20Pack%20Demo.png)
+
 ## Challenges Faced and Solutions Implemented
 
 During development and deployment, several integration and configuration challenges were encountered:
@@ -176,6 +180,8 @@ During development and deployment, several integration and configuration challen
 ### Challenge 4: CORS and Backend Dependency
 - **Issue**: Frontend requires active backend service for data operations
 - **Solution**: Implemented proper error handling and user feedback when backend is unavailable
+
+![CORS Error Screenshot](Proof/CORS%20Error.png)
 
 These challenges were resolved through iterative development, proper testing, and close coordination with the backend team.
 
