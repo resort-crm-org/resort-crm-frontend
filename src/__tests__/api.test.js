@@ -1,4 +1,4 @@
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 vi.mock('axios', () => {
   const mockInstance = {
@@ -30,6 +30,10 @@ import {
 describe('api service', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
   });
 
   it('getGuests calls GET /api/guests and returns data', async () => {
@@ -97,5 +101,14 @@ describe('api service', () => {
   it('createGuest propagates rejection on error', async () => {
     api.post.mockRejectedValue(new Error('Server error'));
     await expect(createGuest({})).rejects.toThrow('Server error');
+  });
+
+  it('throws when VITE_BACKEND_URL is not set', async () => {
+    vi.resetModules();
+    vi.stubEnv('VITE_BACKEND_URL', '');
+
+    await expect(import('../services/api')).rejects.toThrow(
+      'VITE_BACKEND_URL is not set in the environment'
+    );
   });
 });
