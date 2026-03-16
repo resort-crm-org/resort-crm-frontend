@@ -183,6 +183,100 @@ describe('App', () => {
     });
   });
 
+  it('allots a room successfully and shows success info', async () => {
+    api.getGuests.mockResolvedValue([{ id: 1, name: 'Alice', email: 'a@test.com', phone: '555', address: 'St' }]);
+    api.getAvailableRooms.mockResolvedValue([{ id: 2, roomNumber: '101' }]);
+    api.allotRoom.mockResolvedValue({ success: true });
+    render(<App />);
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /Allot Room/i })).not.toBeDisabled();
+    });
+
+    const selects = screen.getAllByRole('combobox');
+    fireEvent.change(selects[0], { target: { value: '1' } });
+    fireEvent.change(selects[1], { target: { value: '2' } });
+    fireEvent.change(screen.getByPlaceholderText('Days'), { target: { value: '3' } });
+    fireEvent.click(screen.getByRole('button', { name: /Allot Room/i }));
+
+    await waitFor(() => {
+      expect(api.allotRoom).toHaveBeenCalledWith({ guestId: 1, roomId: 2, days: 3 });
+      expect(screen.getByText(/Room allotted/i)).toBeInTheDocument();
+    });
+  });
+
+  it('shows API error when allotRoom fails', async () => {
+    api.getGuests.mockResolvedValue([{ id: 1, name: 'Alice', email: 'a@test.com', phone: '555', address: 'St' }]);
+    api.getAvailableRooms.mockResolvedValue([{ id: 2, roomNumber: '101' }]);
+    api.allotRoom.mockRejectedValue({ response: { data: { message: 'Room not available' } } });
+    render(<App />);
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /Allot Room/i })).not.toBeDisabled();
+    });
+
+    const selects = screen.getAllByRole('combobox');
+    fireEvent.change(selects[0], { target: { value: '1' } });
+    fireEvent.change(selects[1], { target: { value: '2' } });
+    fireEvent.change(screen.getByPlaceholderText('Days'), { target: { value: '3' } });
+    fireEvent.click(screen.getByRole('button', { name: /Allot Room/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Room not available/i)).toBeInTheDocument();
+    });
+  });
+
+  it('shows fallback error when allotRoom fails without message', async () => {
+    api.getGuests.mockResolvedValue([{ id: 1, name: 'Alice', email: 'a@test.com', phone: '555', address: 'St' }]);
+    api.getAvailableRooms.mockResolvedValue([{ id: 2, roomNumber: '101' }]);
+    api.allotRoom.mockRejectedValue(new Error('unknown'));
+    render(<App />);
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /Allot Room/i })).not.toBeDisabled();
+    });
+
+    const selects = screen.getAllByRole('combobox');
+    fireEvent.change(selects[0], { target: { value: '1' } });
+    fireEvent.change(selects[1], { target: { value: '2' } });
+    fireEvent.change(screen.getByPlaceholderText('Days'), { target: { value: '3' } });
+    fireEvent.click(screen.getByRole('button', { name: /Allot Room/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Could not allot room/i)).toBeInTheDocument();
+    });
+  });
+
+  it('shows fallback error when deleteGuest fails without message', async () => {
+    api.getGuests.mockResolvedValue([
+      { id: 1, name: 'Alice', email: 'a@test.com', phone: '555', address: 'St' },
+    ]);
+    api.deleteGuest.mockRejectedValue(new Error('Unknown'));
+    render(<App />);
+
+    await waitFor(() => screen.getByRole('button', { name: /Delete/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Delete/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Could not delete guest/i)).toBeInTheDocument();
+    });
+  });
+
+  it('shows fallback error when releaseRoom fails without message', async () => {
+    api.getRooms.mockResolvedValue([
+      { id: 1, roomNumber: '101', status: 'OCCUPIED', guest: { id: 10, name: 'Bob' }, allottedDays: 2 },
+    ]);
+    api.releaseRoom.mockRejectedValue(new Error('Unknown'));
+    render(<App />);
+
+    await waitFor(() => screen.getByRole('button', { name: /Release/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Release/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Could not release room/i)).toBeInTheDocument();
+    });
+  });
+
   it('logs error when initial data load fails', async () => {
     api.getGuests.mockRejectedValue(new Error('Network error'));
     const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
