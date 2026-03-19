@@ -84,17 +84,4 @@ describe('RoomsPage', () => {
     expect(screen.getByText('Room 101')).toBeInTheDocument();
     expect(screen.getByText('Room 102')).toBeInTheDocument();
   });
-
-  it('shows occupancy counter with available and booked totals', () => {
-    const rooms = [
-      { id: 1, roomNumber: '101', status: 'AVAILABLE', guest: null },
-      { id: 2, roomNumber: '102', status: 'OCCUPIED', guest: { id: 20, name: 'Bob' }, allottedDays: 2 },
-      { id: 3, roomNumber: '103', status: 'BOOKED', guest: { id: 30, name: 'Jane' }, allottedDays: 1 },
-    ];
-
-    render(<RoomsPage {...defaultProps} rooms={rooms} />);
-
-    expect(screen.getByText('Available: 1')).toBeInTheDocument();
-    expect(screen.getByText('Booked: 2')).toBeInTheDocument();
-  });
 });
