@@ -308,7 +308,7 @@ button.danger {
 }
 
 .list-item {
-  padding: 12px;
+    padding: 12px;
   border-radius: 14px;
   border: 1px solid var(--border);
   background: rgba(11, 15, 33, 0.82);
