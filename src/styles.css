@@ -307,6 +307,24 @@ button.danger {
   gap: 8px;
 }
 
+.occupancy-summary {
+  margin: 0 0 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.occupancy-value {
+  font-weight: 700;
+}
+
+.occupancy-value.available {
+  color: #4ade80;
+}
+
+.occupancy-value.booked {
+  color: #f87171;
+}
+
 .list-item {
   padding: 12px;
   border-radius: 14px;
