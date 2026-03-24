@@ -340,11 +340,27 @@ button.danger {
   padding-right: 4px;
 }
 
+.guests-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
 .rooms-list::-webkit-scrollbar {
   width: 8px;
 }
 
+.guests-list::-webkit-scrollbar {
+  width: 8px;
+}
+
 .rooms-list::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.35);
+  border-radius: 999px;
+}
+
+.guests-list::-webkit-scrollbar-track {
   background: rgba(15, 23, 42, 0.35);
   border-radius: 999px;
 }
@@ -354,11 +370,24 @@ button.danger {
   border-radius: 999px;
 }
 
+.guests-list::-webkit-scrollbar-thumb {
+  background: rgba(61, 231, 247, 0.5);
+  border-radius: 999px;
+}
+
 [data-theme='light'] .rooms-list::-webkit-scrollbar-track {
   background: rgba(148, 163, 184, 0.3);
 }
 
+[data-theme='light'] .guests-list::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.3);
+}
+
 [data-theme='light'] .rooms-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 53, 0.45);
+}
+
+[data-theme='light'] .guests-list::-webkit-scrollbar-thumb {
   background: rgba(255, 107, 53, 0.45);
 }
 

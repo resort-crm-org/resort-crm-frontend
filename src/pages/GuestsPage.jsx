@@ -38,7 +38,7 @@ function GuestsPage({
           Add Guest
         </button>
       </div>
-      <div className="list">
+      <div className="list guests-list" role="region" aria-label="Guests list">
         {guests.length === 0 && <p>No guests yet.</p>}
         {guests.map((guest) => {
           const room = guestRoomMap.get(guest.id);
