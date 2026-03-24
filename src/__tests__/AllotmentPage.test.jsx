@@ -55,8 +55,19 @@ describe('AllotmentPage', () => {
   it('calls onAllot when Allot Room button is clicked', () => {
     const onAllot = vi.fn();
     render(<AllotmentPage {...defaultProps} onAllot={onAllot} />);
+    fireEvent.change(screen.getByLabelText('Room type'), { target: { value: 'Deluxe' } });
     fireEvent.click(screen.getByRole('button', { name: /Allot Room/i }));
     expect(onAllot).toHaveBeenCalled();
+  });
+
+  it('shows validation message and does not call onAllot when room type is not selected', () => {
+    const onAllot = vi.fn();
+    render(<AllotmentPage {...defaultProps} onAllot={onAllot} />);
+
+    fireEvent.click(screen.getByRole('button', { name: /Allot Room/i }));
+
+    expect(screen.getByText('Please select a room type.')).toBeInTheDocument();
+    expect(onAllot).not.toHaveBeenCalled();
   });
 
   it('disables Allot Room button when disabled is true', () => {
@@ -103,5 +114,28 @@ describe('AllotmentPage', () => {
     // Second combobox is the RoomSpinner
     fireEvent.change(selects[1], { target: { value: '3' } });
     expect(setSelectedRoomId).toHaveBeenCalledWith('3');
+  });
+
+  it('keeps total price as 0 by default and updates based on room type and days', () => {
+    const { rerender } = render(<AllotmentPage {...defaultProps} />);
+
+    expect(screen.getByText('Price per day: Rs 0 | Total: Rs 0')).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText('Room type'), { target: { value: 'Suite' } });
+    expect(screen.getByText('Price per day: Rs 3500 | Total: Rs 0')).toBeInTheDocument();
+    expect(screen.getByDisplayValue('0')).toBeInTheDocument();
+
+    rerender(<AllotmentPage {...defaultProps} days={'3'} />);
+    expect(screen.getByDisplayValue('10500')).toBeInTheDocument();
+    expect(screen.getByText('Price per day: Rs 3500 | Total: Rs 10500')).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText('Room type'), { target: { value: '' } });
+    expect(screen.getByDisplayValue('0')).toBeInTheDocument();
+  });
+
+  it('renders total price field as read-only', () => {
+    render(<AllotmentPage {...defaultProps} />);
+
+    expect(screen.getByLabelText('Total Price')).toHaveAttribute('readonly');
   });
 });

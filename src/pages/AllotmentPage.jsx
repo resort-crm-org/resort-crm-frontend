@@ -1,5 +1,12 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import RoomSpinner from '../components/RoomSpinner';
+
+const PRICE_BY_ROOM_TYPE = {
+  Standard: 1000,
+  Deluxe: 2000,
+  Suite: 3500,
+};
 
 function AllotmentPage({
   guests,
@@ -14,6 +21,29 @@ function AllotmentPage({
   disabled,
   loading,
 }) {
+  const [roomType, setRoomType] = useState('');
+  const [price, setPrice] = useState(0);
+  const [formError, setFormError] = useState('');
+  const parsedDays = Number(days);
+  const totalPrice = roomType && Number.isFinite(parsedDays) && parsedDays > 0 ? price * parsedDays : 0;
+
+  const handleRoomTypeChange = (event) => {
+    const nextRoomType = event.target.value;
+    setRoomType(nextRoomType);
+    setPrice(PRICE_BY_ROOM_TYPE[nextRoomType] ?? 0);
+    setFormError('');
+  };
+
+  const handleAllotClick = () => {
+    if (!roomType) {
+      setFormError('Please select a room type.');
+      return;
+    }
+
+    setFormError('');
+    onAllot();
+  };
+
   return (
     <section className="card">
       <h2>Room Allotment</h2>
@@ -42,10 +72,28 @@ function AllotmentPage({
           onChange={(e) => setDays(e.target.value)}
         />
 
-        <button onClick={onAllot} disabled={disabled || loading}>
+        <select value={roomType} onChange={handleRoomTypeChange} aria-label="Room type" disabled={loading}>
+          <option value="">Select room type</option>
+          <option value="Standard">Standard</option>
+          <option value="Deluxe">Deluxe</option>
+          <option value="Suite">Suite</option>
+        </select>
+
+        <input
+          type="number"
+          value={totalPrice}
+          placeholder="Total Price"
+          aria-label="Total Price"
+          readOnly
+          disabled={loading}
+        />
+
+        <button onClick={handleAllotClick} disabled={disabled || loading}>
           Allot Room
         </button>
       </div>
+      <p className="meta">Price per day: Rs {price} | Total: Rs {totalPrice}</p>
+      {formError && <div className="banner error">{formError}</div>}
       {disabled && <p className="meta">No available rooms right now.</p>}
     </section>
   );
