@@ -55,19 +55,17 @@ describe('AllotmentPage', () => {
   it('calls onAllot when Allot Room button is clicked', () => {
     const onAllot = vi.fn();
     render(<AllotmentPage {...defaultProps} onAllot={onAllot} />);
-    fireEvent.change(screen.getByLabelText('Room type'), { target: { value: 'Deluxe' } });
     fireEvent.click(screen.getByRole('button', { name: /Allot Room/i }));
     expect(onAllot).toHaveBeenCalled();
   });
 
-  it('shows validation message and does not call onAllot when room type is not selected', () => {
+  it('does not require room type to call onAllot', () => {
     const onAllot = vi.fn();
     render(<AllotmentPage {...defaultProps} onAllot={onAllot} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Allot Room/i }));
 
-    expect(screen.getByText('Please select a room type.')).toBeInTheDocument();
-    expect(onAllot).not.toHaveBeenCalled();
+    expect(onAllot).toHaveBeenCalled();
   });
 
   it('disables Allot Room button when disabled is true', () => {

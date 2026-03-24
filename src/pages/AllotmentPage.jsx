@@ -23,7 +23,6 @@ function AllotmentPage({
 }) {
   const [roomType, setRoomType] = useState('');
   const [price, setPrice] = useState(0);
-  const [formError, setFormError] = useState('');
   const parsedDays = Number(days);
   const totalPrice = roomType && Number.isFinite(parsedDays) && parsedDays > 0 ? price * parsedDays : 0;
 
@@ -31,17 +30,6 @@ function AllotmentPage({
     const nextRoomType = event.target.value;
     setRoomType(nextRoomType);
     setPrice(PRICE_BY_ROOM_TYPE[nextRoomType] ?? 0);
-    setFormError('');
-  };
-
-  const handleAllotClick = () => {
-    if (!roomType) {
-      setFormError('Please select a room type.');
-      return;
-    }
-
-    setFormError('');
-    onAllot();
   };
 
   return (
@@ -88,12 +76,11 @@ function AllotmentPage({
           disabled={loading}
         />
 
-        <button onClick={handleAllotClick} disabled={disabled || loading}>
+        <button onClick={onAllot} disabled={disabled || loading}>
           Allot Room
         </button>
       </div>
       <p className="meta">Price per day: Rs {price} | Total: Rs {totalPrice}</p>
-      {formError && <div className="banner error">{formError}</div>}
       {disabled && <p className="meta">No available rooms right now.</p>}
     </section>
   );
