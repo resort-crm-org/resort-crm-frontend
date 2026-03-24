@@ -18,6 +18,17 @@
   --streak-3: rgba(255, 230, 109, 0.15);
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
 [data-theme='light'] {
   background: #f6f6fb;
   color: #0f172a;
@@ -99,10 +110,15 @@ body::after {
   padding: 24px;
   position: relative;
   z-index: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 header {
-  margin-bottom: 16px;
+  margin-bottom: 0;
+  flex-shrink: 0;
 }
 
 .header-row {
@@ -142,9 +158,10 @@ h2 {
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
   gap: 16px;
+  flex: 1;
+  min-height: 0;
 }
 
 .card {
@@ -155,6 +172,15 @@ h2 {
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
   animation: float-in 520ms ease-out both;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.grid > .card {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 [data-theme='light'] .card {
@@ -307,6 +333,35 @@ button.danger {
   gap: 8px;
 }
 
+.rooms-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.rooms-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rooms-list::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.35);
+  border-radius: 999px;
+}
+
+.rooms-list::-webkit-scrollbar-thumb {
+  background: rgba(61, 231, 247, 0.5);
+  border-radius: 999px;
+}
+
+[data-theme='light'] .rooms-list::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.3);
+}
+
+[data-theme='light'] .rooms-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 53, 0.45);
+}
+
 .occupancy-summary {
   margin: 0 0 12px;
   color: var(--text-muted);
@@ -430,6 +485,14 @@ button.danger {
 }
 
 @media (max-width: 640px) {
+  .app {
+    padding: 16px;
+  }
+
+  .grid {
+    gap: 12px;
+  }
+
   .actions {
     flex-direction: column;
   }

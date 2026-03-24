@@ -12,7 +12,7 @@ function RoomsPage({ rooms, onRelease, loading }) {
         {' | '}
         <span className="occupancy-value booked">Booked: {bookedCount}</span>
       </p>
-      <div className="list">
+      <div className="list rooms-list" role="region" aria-label="Rooms list">
         {rooms.length === 0 && <p>No rooms yet.</p>}
         {rooms.map((room) => (
           <div key={room.id} className="list-item">
