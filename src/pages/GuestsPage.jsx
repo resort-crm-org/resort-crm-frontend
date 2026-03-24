@@ -43,12 +43,20 @@ function GuestsPage({
         {guests.map((guest) => {
           const room = guestRoomMap.get(guest.id);
           return (
-            <div key={guest.id} className="list-item">
-              <div>
-                <strong>{guest.name}</strong>
-                <div className="meta">{guest.email} · {guest.phone}</div>
-                <div className="meta">{guest.address}</div>
-                {room && <div className="tag">Room {room.roomNumber} · {room.allottedDays} days</div>}
+            <div key={guest.id} className="list-item guest-item">
+              <div className="guest-content">
+                <strong className="guest-name">{guest.name}</strong>
+                <div className="meta guest-phone">Phone: {guest.phone}</div>
+                <div className="guest-badges">
+                  {room ? (
+                    <>
+                      <span className="tag guest-room-tag">Room {room.roomNumber}</span>
+                      <span className="tag guest-days-tag">{room.allottedDays} days</span>
+                    </>
+                  ) : (
+                    <span className="tag guest-room-tag">No room allotted</span>
+                  )}
+                </div>
               </div>
               <div className="actions">
                 {room && (

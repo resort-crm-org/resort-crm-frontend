@@ -72,15 +72,15 @@ describe('GuestsPage', () => {
     expect(setGuestForm).toHaveBeenCalledWith({ name: '', email: '', phone: '', address: '42 Main St' });
   });
 
-  it('renders guest details in the list', () => {
+  it('renders guest list details with phone only (no email or address)', () => {
     const guests = [
       { id: 1, name: 'Alice', email: 'alice@test.com', phone: '555-1234', address: '1 Main St' },
     ];
     render(<GuestsPage {...defaultProps} guests={guests} />);
     expect(screen.getByText('Alice')).toBeInTheDocument();
-    expect(screen.getByText(/alice@test.com/)).toBeInTheDocument();
-    expect(screen.getByText(/555-1234/)).toBeInTheDocument();
-    expect(screen.getByText(/1 Main St/)).toBeInTheDocument();
+    expect(screen.getByText(/Phone: 555-1234/)).toBeInTheDocument();
+    expect(screen.queryByText(/alice@test.com/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/1 Main St/)).not.toBeInTheDocument();
   });
 
   it('renders Delete button for each guest', () => {
