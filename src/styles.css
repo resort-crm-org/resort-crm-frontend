@@ -435,6 +435,42 @@ button.danger {
   font-size: 13px;
 }
 
+.allotment-rate-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.allotment-rate-card {
+  border: 1px solid var(--border);
+  background: rgba(8, 13, 30, 0.7);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+[data-theme='light'] .allotment-rate-card {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.allotment-rate-type {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.allotment-rate-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #67e8f9;
+}
+
+[data-theme='light'] .allotment-rate-value {
+  color: #0f766e;
+}
+
 .actions {
   display: flex;
   gap: 8px;
@@ -575,5 +611,9 @@ button.danger {
 
   .guest-name {
     font-size: 22px;
+  }
+
+  .allotment-rate-list {
+    grid-template-columns: 1fr;
   }
 }

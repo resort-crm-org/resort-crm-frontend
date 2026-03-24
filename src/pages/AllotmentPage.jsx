@@ -8,6 +8,8 @@ const PRICE_BY_ROOM_TYPE = {
   Suite: 3500,
 };
 
+const ROOM_TYPE_ORDER = ['Standard', 'Deluxe', 'Suite'];
+
 function AllotmentPage({
   guests,
   availableRooms,
@@ -81,6 +83,16 @@ function AllotmentPage({
         </button>
       </div>
       <p className="meta">Price per day: Rs {price} | Total: Rs {totalPrice}</p>
+
+      <div className="allotment-rate-list" aria-label="Room type prices">
+        {ROOM_TYPE_ORDER.map((type) => (
+          <div key={type} className="allotment-rate-card">
+            <span className="allotment-rate-type">{type}</span>
+            <span className="allotment-rate-value">Rs {PRICE_BY_ROOM_TYPE[type]}/day</span>
+          </div>
+        ))}
+      </div>
+
       {disabled && <p className="meta">No available rooms right now.</p>}
     </section>
   );

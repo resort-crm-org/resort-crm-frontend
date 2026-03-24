@@ -136,4 +136,17 @@ describe('AllotmentPage', () => {
 
     expect(screen.getByLabelText('Total Price')).toHaveAttribute('readonly');
   });
+
+  it('renders room type price cards', () => {
+    render(<AllotmentPage {...defaultProps} />);
+
+    const rateList = screen.getByLabelText('Room type prices');
+
+    expect(rateList).toHaveTextContent('Standard');
+    expect(rateList).toHaveTextContent('Deluxe');
+    expect(rateList).toHaveTextContent('Suite');
+    expect(rateList).toHaveTextContent('Rs 1000/day');
+    expect(rateList).toHaveTextContent('Rs 2000/day');
+    expect(rateList).toHaveTextContent('Rs 3500/day');
+  });
 });
